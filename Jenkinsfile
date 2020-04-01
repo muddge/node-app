@@ -14,13 +14,13 @@ pipeline {
        steps{
           sh 'docker build -t muddge/node-app .'
           sh 'export PASS=`cat /docker/passwd` ; docker login -u muddge -p $PASS'
-          sh 'docker tag muddge/node-app muddge/node-app:"$env.{$BUILD_NUMBER}"'
+          sh 'docker tag muddge/node-app muddge/node-app:"$BUILD_NUMBER"'
           sh 'docker push "muddge/node-app'
             }
           }
     stage('Remove Image'){
         steps{
-          sh 'docker rmi node-app:+"${env.$BUILD_NUMBER}"'
+          sh 'docker rmi node-app:+"$BUILD_NUMBER"'
         }
     }
   }
