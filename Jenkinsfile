@@ -5,11 +5,6 @@ pipeline {
   tools {nodejs "/root/.nvm/versions/node/v13.12.0/bin/node"}
 
   stages {
-    stage('Example') {
-      steps {
-        sh 'npm config ls'
-      }
-    }
     stage('Linting') {
       steps {
         sh 'npx eslint -c .eslintrc.json app.js'
@@ -22,8 +17,6 @@ pipeline {
           sh 'docker push muddge/node-app:+"$BUILDNUMBER"'
             }
           }
-        }
-    }
     stage('Remove Image'){
         steps{
           sh 'docker rmi node-app:+"$BUILDNUMBER"'
