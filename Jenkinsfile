@@ -16,12 +16,14 @@ pipeline {
       }
     }
     stage('Build & Push Docker Image') {
-       steps{  
-         docker.withRegistry( 'https://docker.io/muddge/node-app', 'dockerhub' ) {
+       steps{
+         script{
+           docker.withRegistry( 'https://docker.io/muddge/node-app', 'dockerhub' ) {
                     def buildName = "muddge/node-app:" + "$BUILD_NUMBER"
                         newApp = docker.build buildName
                         newApp.push()
             }
+          }
         }
     }
     stage('Remove Image'){
