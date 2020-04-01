@@ -13,7 +13,7 @@ pipeline {
     stage('Build & Push Docker Image') {
        steps{
           sh 'docker build -t muddge/node-app .'
-          sh 'docker login -u muddge'
+          sh 'sudo cat /root/passwd | docker login -u muddge -p'
           sh 'docker tag muddge/node-app muddge/node-app:$BUILDNUMBER'
           sh 'docker push "muddge/node-app'
             }
