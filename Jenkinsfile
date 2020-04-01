@@ -1,10 +1,5 @@
 pipeline {
 
-  environment{
-    def newApp
-    def registry = 'muddge/node-app'
-    def registryCredential = 'dockerhub'
-  }
   agent any
 
   tools {nodejs "/root/.nvm/versions/node/v13.12.0/bin/node"}
