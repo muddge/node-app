@@ -15,7 +15,7 @@ pipeline {
           sh 'docker build -t muddge/node-app .'
           sh 'export PASS=`cat /docker/passwd` ; docker login -u muddge -p $PASS'
           sh 'docker tag muddge/node-app muddge/node-app:"$BUILD_NUMBER"'
-          sh 'docker push "muddge/node-app'
+          sh 'docker push muddge/node-app'
             }
           }
     stage('Remove Image'){
