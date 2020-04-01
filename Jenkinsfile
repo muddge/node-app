@@ -20,7 +20,7 @@ pipeline {
           }
     stage('Remove Image'){
         steps{
-          sh 'docker rmi node-app:+"$BUILD_NUMBER"'
+          sh 'docker rmi node-app:"$BUILD_NUMBER"'
         }
     }
   }
