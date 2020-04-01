@@ -1,14 +1,14 @@
 pipeline {
-    
+
   environment{
     def newApp
     def registry = 'muddge/node-app'
     def registryCredential = 'dockerhub'
   }
   agent any
- 
+
   tools {nodejs "/root/.nvm/versions/node/v13.12.0/bin/node"}
- 
+
   stages {
     stage('Example') {
       steps {
@@ -21,14 +21,18 @@ pipeline {
       }
     }
     stage('Build & Push Docker Image') {
+       steps{  
          docker.withRegistry( 'https://' + registry, registryCredential ) {
-		    def buildName = registry + ":$BUILD_NUMBER"
-			newApp = docker.build buildName
-			newApp.push()
+                    def buildName = registry + ":$BUILD_NUMBER"
+                        newApp = docker.build buildName
+                        newApp.push()
+            }
         }
     }
     stage('Remove Image'){
-        sh 'docker rmi $registry:$BUILD_NUMBER'
+        steps{
+          sh 'docker rmi $registry:$BUILD_NUMBER'
+        }
     }
   }
 }
