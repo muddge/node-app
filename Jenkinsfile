@@ -17,18 +17,16 @@ pipeline {
     }
     stage('Build & Push Docker Image') {
        steps{
-         script{
-           docker.withRegistry( 'https://docker.io/muddge/node-app', 'dockerhub' ) {
-                    def buildName = "muddge/node-app:" + "$BUILD_NUMBER"
-                        newApp = docker.build buildName
-                        newApp.push()
+          sh 'docker build --tag node-app:+"$BUILDNUMBER"'
+          sh 'docker login --username=muddge -p="$DOCKER_PASSWORD"'
+          sh 'docker push muddge/node-app:+"$BUILDNUMBER"'
             }
           }
         }
     }
     stage('Remove Image'){
         steps{
-          sh 'docker rmi $registry:$BUILD_NUMBER'
+          sh 'docker rmi node-app:+"$BUILDNUMBER"'
         }
     }
   }
