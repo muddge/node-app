@@ -8,7 +8,7 @@ COPY package.json ./
 RUN npm install
 
 #Bundle app source
-COPY ./app .
+COPY . /app
 
 #Expose port 3000
 EXPOSE 3000
