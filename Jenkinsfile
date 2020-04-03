@@ -24,6 +24,7 @@ pipeline {
     }
     stage('Set current kubectl context'){
         steps{
+          sh 'export PATH=$PATH:/usr/local/bin/'
           sh '/usr/local/bin/kubectl config set-context iam-root-account@prod.us-west-2.eksctl.io --namespace=node-app'
         }
     }
