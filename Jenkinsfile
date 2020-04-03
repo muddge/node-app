@@ -22,5 +22,15 @@ pipeline {
           sh 'docker push muddge/node-app'
         }
     }
+    stage('Set current kubectl context'){
+        steps{
+          sh 'kubectl config set-context --current --namespace=node-app'
+        }
+    }
+    stage('Deploy Container'){
+        steps{
+          sh 'kubectl set image deployment/node-app node-app=docker.io/muddge/node-app:latest'
+        }
+    }
   }
 }
