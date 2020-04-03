@@ -24,7 +24,7 @@ pipeline {
     }
     stage('Set current kubectl context'){
         steps{
-          sh 'kubectl config set-context --current --namespace=node-app'
+          sh '/usr/local/bin/kubectl config set-context --current --namespace=node-app'
         }
     }
     stage('Deploy Container'){
