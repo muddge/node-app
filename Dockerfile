@@ -13,4 +13,4 @@ COPY . .
 #Expose port 3000
 EXPOSE 3000
 
-CMD [ "npm", "./www/bin" ]
+CMD [ "node", "./www/bin" ]
