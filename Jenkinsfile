@@ -24,7 +24,7 @@ pipeline {
     }
     stage('Set current kubectl context'){
         steps{
-          sh '/usr/local/bin/kubectl config set-context --current --namespace=node-app'
+          sh '/usr/local/bin/kubectl config set-context iam-root-account@prod.us-west-2.eksctl.io --namespace=node-app'
         }
     }
     stage('Deploy Container'){
