@@ -29,7 +29,7 @@ pipeline {
     }
     stage('Deploy Container'){
         steps{
-          sh '/usr/local/bin/kubectl set image deployment/node-app node-app=docker.io/muddge/node-app:latest'
+          sh '/usr/local/bin/kubectl set image --kubeconfig=/root/.kube/config deployment/node-app node-app=docker.io/muddge/node-app:latest'
         }
     }
   }
